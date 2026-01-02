@@ -1,0 +1,101 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Center Pages */
+body {
+  background-color: #f4f6f8;
+}
+
+/* Common container */
+.container {
+  width: 350px;
+  margin: 80px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+input:focus {
+  border-color: #007bff;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Switch link */
+.switch {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.switch button {
+  background: none;
+  color: #007bff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.switch button:hover {
+  text-decoration: underline;
+}
+
+/* Navbar */
+nav {
+  background-color: #111;
+  color: white;
+  padding: 15px 30px;
+}
+
+nav h3 {
+  margin: 0;
+}
+
+/* Home Page */
+.home {
+  padding: 40px;
+  text-align: center;
+}
+
+.home h1 {
+  color: #333;
+}
+
+
+
