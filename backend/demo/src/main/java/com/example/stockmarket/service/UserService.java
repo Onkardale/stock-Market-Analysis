@@ -13,8 +13,11 @@ import java.util.List;
 @Service
 public class UserService {
 
+
+
     @Autowired
     private  UserRepository repo;
+
 
     @Autowired
     private PasswordEncoder encoder;
@@ -49,6 +52,18 @@ public class UserService {
         }
 
         return "Login successful";
+    }
+     public List<User> getAllUser(){
+      return repo.findAll();
+    }
+    // get user by id
+    public User getUserById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    // get user by email
+    public User getUserByEmail(String email) {
+        return repo.findByEmail(email).orElse(null);
     }
 
 }

@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+
 
 
 
 
 function Home() {
       // const navigate = useNavigate();
+     const navigate = useNavigate();
   const [aiResponse, setAiResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showInput, setShowInput] = useState(false);
@@ -388,10 +392,10 @@ function Home() {
               <h3>Stock Market Pro</h3>
             </div>
             <div className="nav-links">
-              <a href="#home">Home</a>
-              <a href="#markets">Markets</a>
-              <a href="#about">About</a>
-            </div>
+               <Link to="/">Home</Link>
+  <Link to="/market">Markets</Link>
+  <Link to="/about">About</Link>
+          </div>
           </div>
         </nav>
 
@@ -405,20 +409,46 @@ function Home() {
           <div className="hero">
             <h1>Welcome to Stock Analysis</h1>
             <p>Track, analyze, and make informed decisions with real-time market data</p>
-            
-           
+            </div>
+
+
+
+
+
+
+
+
+
+
 
             
-          </div>
 
           <div className="cards-grid">
             <div className="card">
               <div className="card-icon">📊</div>
               <h3>Live Trading</h3>
               <p>Monitor real-time stock prices and market movements with advanced analytics</p>
-              <div className="card-footer"><button>Live Market</button>
+              <div className="card-footer"><button
+              onClick={() => navigate ("/livetrading")}>Live Market</button>
               </div>
             </div>
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div className="card">
               <div className="card-icon">📉</div>
@@ -431,7 +461,7 @@ function Home() {
               <div className="card-icon">💼</div>
               <h3>Portfolio Tracking</h3>
               <p>Keep track of your investments and watch your portfolio grow over time</p>
-              <div className="card-footer"><button>track Now</button></div>
+              <div className="card-footer"><button onClick={() => navigate ("/tracknow")}>track Now</button></div>
             </div>
           </div>
 
@@ -474,6 +504,8 @@ function Home() {
                 />
               </div>
             )}
+            
+
             </div>
           </div>
         </div>

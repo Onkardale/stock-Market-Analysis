@@ -33,5 +33,7 @@ spring:
       name: ${SECURITY_USERNAME:anuj}
       password: ${SECURITY_PASSWORD:1234}
 
-openai:
-  api-key: https://chatgpt.com/c/69064805-5f5c-8320-aa52-20411388799e
+sambanova:
+  api:
+    key: f000180f-9866-4578-a71d-f2998371b82c
+    base-url: https://claude.ai/chat/2039d179-fd1e-45c9-a376-e8356246a0b7

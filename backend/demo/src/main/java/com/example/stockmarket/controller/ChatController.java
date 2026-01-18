@@ -9,59 +9,76 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/chat")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 public class ChatController {
 
-    @Value("${openai.api-key:}")
+    @Value("${sambanova.api.key}")
     private String apiKey;
+
+    @Value("${sambanova.api.base-url}")
+    private String baseUrl;
 
     @PostMapping
     public ResponseEntity<?> chat(@RequestBody Map<String, String> request) {
 
-        // Debug: Print first/last 4 chars of key
-        System.out.println("API Key starts with: " + apiKey.substring(0, 7));
-        System.out.println("API Key ends with: " + apiKey.substring(apiKey.length() - 4));
-
-        if (apiKey == null || apiKey.isEmpty()) {
+        if (apiKey == null || apiKey.isBlank()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "OpenAI API key is not configured"));
+                    .body(Map.of("error", "SambaNova API key is not configured"));
         }
 
         String prompt = request.get("prompt");
 
-        if (prompt == null || prompt.isEmpty()) {
+        if (prompt == null || prompt.isBlank()) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Prompt is required"));
         }
 
         try {
             RestTemplate restTemplate = new RestTemplate();
-            String url = "https://api.openai.com/v1/chat/completions";
+
+            String url = baseUrl + "/chat/completions";
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBearerAuth(apiKey.trim()); // Trim whitespace
+            headers.setBearerAuth(apiKey.trim());
 
+            // Request body
             Map<String, Object> body = new HashMap<>();
-            body.put("model", "gpt-4o-mini");
+            body.put("model", "Meta-Llama-3.1-8B-Instruct");
 
             List<Map<String, String>> messages = new ArrayList<>();
-            messages.add(Map.of("role", "user", "content", prompt));
+            messages.add(Map.of(
+                    "role", "user",
+                    "content", prompt
+            ));
 
             body.put("messages", messages);
+            body.put("temperature", 0.7);
+            body.put("max_tokens", 300);
 
-            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
+            HttpEntity<Map<String, Object>> entity =
+                    new HttpEntity<>(body, headers);
 
-            ResponseEntity<Map> response = restTemplate.postForEntity(url, entity, Map.class);
+            ResponseEntity<Map> response =
+                    restTemplate.postForEntity(url, entity, Map.class);
 
-            Map choice = (Map) ((List) response.getBody().get("choices")).get(0);
-            Map message = (Map) choice.get("message");
+            Map responseBody = response.getBody();
+            List choices = (List) responseBody.get("choices");
 
-            return ResponseEntity.ok(Map.of("response", message.get("content").toString()));
+            Map firstChoice = (Map) choices.get(0);
+            Map message = (Map) firstChoice.get("message");
+
+            return ResponseEntity.ok(
+                    Map.of("response", message.get("content"))
+            );
 
         } catch (Exception e) {
-            e.printStackTrace(); // Print full error
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Failed to get response from OpenAI: " + e.getMessage()));
+                    .body(Map.of(
+                            "error", "Chat API failed",
+                            "details", e.getMessage()
+                    ));
         }
-    }}
+    }
+}

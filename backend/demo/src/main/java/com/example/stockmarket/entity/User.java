@@ -26,6 +26,20 @@ public class User {
 
     private String verificationToken;
 
+
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+//
+//    @Column(nullable = false)
+//    private String role; // USER or ADMIN
+
+
+
     // ===== GETTERS & SETTERS =====
 
     public Long getId() {
