@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup({ setPage }) {
+
+const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: "",
@@ -111,12 +114,12 @@ function Signup({ setPage }) {
 
         <p style={signupStyles.text}>
           Already registered?{" "}
-          <span
-            style={signupStyles.link}
-            onClick={() => setPage("login")}
-          >
-            Login
-          </span>
+         <span
+  style={signupStyles.link}
+  onClick={() => navigate("/login")}
+>
+  Login
+</span>
         </p>
       </div>
     </div>

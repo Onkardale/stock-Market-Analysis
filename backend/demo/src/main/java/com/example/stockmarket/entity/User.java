@@ -13,32 +13,20 @@ public class User {
 
     private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String gender;
 
     private LocalDate birthdate;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private boolean emailVerified;
 
     private String verificationToken;
-
-
-//    public String getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(String role) {
-//        this.role = role;
-//    }
-//
-//    @Column(nullable = false)
-//    private String role; // USER or ADMIN
-
-
 
     // ===== GETTERS & SETTERS =====
 
@@ -86,10 +74,12 @@ public class User {
         this.password = password;
     }
 
+    // ✅ CORRECT GETTER
     public boolean isEmailVerified() {
         return emailVerified;
     }
 
+    // ✅ CORRECT SETTER
     public void setEmailVerified(boolean emailVerified) {
         this.emailVerified = emailVerified;
     }

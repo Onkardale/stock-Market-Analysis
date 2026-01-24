@@ -32,22 +32,22 @@ public class UserController {
 //
 //        return ResponseEntity.notFound().build();
 //    }
-
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUser();
-    }
-
-    // ✅ GET USER BY ID
-    @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
-    }
-
-    // ✅ GET USER BY EMAIL
-    @GetMapping("/users/email/{email}")
-    public User getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
-    }
+//
+//    @GetMapping("/users")
+//    public List<User> getAllUsers() {
+//        return userService.getAllUser();
+//    }
+//
+//    // ✅ GET USER BY ID
+//    @GetMapping("/users/{id}")
+//    public User getUserById(@PathVariable Long id) {
+//        return userService.getUserById(id);
+//    }
+//
+//    // ✅ GET USER BY EMAIL
+//    @GetMapping("/users/email/{email}")
+//    public User getUserByEmail(@PathVariable String email) {
+//        return userService.getUserByEmail(email);
+//    }
 
 }

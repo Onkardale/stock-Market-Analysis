@@ -8,16 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
 
-
-
     @Autowired
-    private  UserRepository repo;
-
+    private UserRepository repo;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -35,6 +30,7 @@ public class UserService {
         user.setGender(req.getGender());
         user.setBirthdate(req.getBirthdate());
         user.setPassword(encoder.encode(req.getPassword()));
+        user.setEmailVerified(false); // ✅ FIXED
 
         repo.save(user);
 
@@ -53,17 +49,4 @@ public class UserService {
 
         return "Login successful";
     }
-     public List<User> getAllUser(){
-      return repo.findAll();
-    }
-    // get user by id
-    public User getUserById(Long id) {
-        return repo.findById(id).orElse(null);
-    }
-
-    // get user by email
-    public User getUserByEmail(String email) {
-        return repo.findByEmail(email).orElse(null);
-    }
-
 }
